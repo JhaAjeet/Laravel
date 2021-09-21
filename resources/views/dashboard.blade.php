@@ -5,8 +5,7 @@
 
             <b>{{ Auth::user()->name }}</b>
             <b style="float:right;"> Total Users 
-                <span class="badge badge-danger"> {{ count($users) }} </span>
-                
+                <span class="badge badge-danger">{{ count($users )}}</span>
             </b>
 
         </h2>
