@@ -5,7 +5,7 @@
 
             <b>{{ Auth::user()->name }}</b>
             <b style="float:right;"> Total Users 
-                <span class="badge badge-danger">{{ count($users )}}</span>
+                <span class="badge badge-warning">{{ count($users) }}</span>
             </b>
 
         </h2>
@@ -37,7 +37,7 @@
                           <th scope="row">{{ $i++ }}</th>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
-                          <td>{{ $user->created_at -> diffForHumans() }}</td>
+                          <td>{{ Carbon\Carbon::parse($user->created_at) -> diffForHumans() }}</td>
                         </tr>
                         @endforeach
                       </tbody>
