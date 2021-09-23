@@ -20,6 +20,14 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
+
+@if(session('sucess'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{ session('sucess')}}</strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
                         <div class="card-header">All Category</div>
                    
 
@@ -51,13 +59,13 @@
                     <div class="card">
                         <div class="cart-header">Category Name</div>
                         <div class="card-body">
-                        <form action="{{route('store.category')}}" method="POST">
+                        <form action="{{route('store.categories')}}" method="POST">
                             @csrf
   <div class="mb-3">
     
-    <input type="text" class="form-control" name="category_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text" class="form-control" name="categories_name" id="exampleInputEmail1" aria-describedby="emailHelp">
     
-        @error('category_name')
+        @error('categories_name')
         <span class="text-danger">{{ $message}}</span>
         @enderror
   </div>
