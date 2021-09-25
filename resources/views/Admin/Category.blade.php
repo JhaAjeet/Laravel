@@ -35,19 +35,31 @@
                       <thead>
                         <tr>
                           <th scope="col">Sr No.</th>
-                          <th scope="col">User_Id</th>
-                          <th scope="col">Category</th>
+                          <th scope="col">Category Name</th>
+                          <th scope="col">user</th>
                           <th scope="col">Time</th>
                         </tr>
                       </thead>
                       <tbody>
+
+                        @php($i = 1)
+                        @foreach($categories as $category)
                         
                         <tr>
-                          <th scope="row"></th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <th scope="row"> {{ $i++ }} </th>
+                          <td>{{ $category->categories_name }}</td>
+                          <td>{{ $category->user_id  }}</td>
+
+                          <td>
+                          @if($category->created_at ==Null)
+                          <span class="text-danger">No Date set</span>
+                          @else
+                          {{ $category->created_at->diffForHumans()  }}
+                          @endif
+
+                          </td>
                         </tr>
+                        @endforeach
                         
                       </tbody>
                 </table>
