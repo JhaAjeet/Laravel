@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     public function index(){
+        //fatch data from database
         // $categories = Categories::all();
-        $categories = Categories::latest()->get();
+
+        // if you want to fetch lattest product is first then use this lattest method
+        //$categories = Categories::latest()->get();
+
+        //using query builder read data
+        $categories = DB::table('categories')->latest()->get();
         return view('Admin.Category', compact('categories'));
     }
 
