@@ -17,13 +17,19 @@ class CategoryController extends Controller
         // $categories = Categories::all();
 
         // if you want to fetch lattest product is first then use this lattest method
-        $categories = Categories::latest()->paginate(5);
+        // $categories = Categories::latest()->paginate(5);
 
         //using query builder read data
         //$categories = DB::table('categories')->latest()->get();
 
         // Laravel pagination 
         //$categories = DB::table('categories')->latest()->paginate(5);
+
+        //Query table join table
+        $categories = DB::table('categories')
+                ->join('users','categories.user_id','users.id')
+                ->select('categories.*','users.name')
+                ->latest()->paginate(5);
 
         return view('Admin.Category', compact('categories'));
     }
