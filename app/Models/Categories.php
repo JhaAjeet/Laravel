@@ -12,9 +12,9 @@ class Categories extends Model
     
     protected $fillable = [
         'user_id',
-        'categories',
+        'categories_name',
     ];
-    // public function user(){
-    //     return $this->hasOne(User::class,'id','user_id');
-    // }
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
 }

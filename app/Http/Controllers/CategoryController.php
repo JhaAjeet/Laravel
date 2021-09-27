@@ -17,7 +17,7 @@ class CategoryController extends Controller
         // $categories = Categories::all();
 
         // if you want to fetch lattest product is first then use this lattest method
-        // $categories = Categories::latest()->paginate(5);
+        $categories = Categories::latest()->paginate(5);
 
         //using query builder read data
         //$categories = DB::table('categories')->latest()->get();
@@ -26,10 +26,10 @@ class CategoryController extends Controller
         //$categories = DB::table('categories')->latest()->paginate(5);
 
         //Query table join table
-        $categories = DB::table('categories')
-                ->join('users','categories.user_id','users.id')
-                ->select('categories.*','users.name')
-                ->latest()->paginate(5);
+        // $categories = DB::table('categories')
+        //         ->join('users','categories.user_id','users.id')
+        //         ->select('categories.*','users.name')
+        //         ->latest()->paginate(5);
 
         return view('Admin.Category', compact('categories'));
     }
@@ -70,5 +70,18 @@ class CategoryController extends Controller
 
 
 
+    }
+    public function Edit($id){
+        $categories = Categories::find($id);
+        return view('Admin.Edit',compact('categories'));
+    }
+    public function Update(Request $request ,$id){
+        $update = Categories::find($id)->update([
+            'categories_name' => $request->categories_name,
+            'user_id' => Auth::user()->id
+
+        ]);
+
+         return redirect()->route('category')->with('sucess','categories Update  sucessfully');
     }
 }
