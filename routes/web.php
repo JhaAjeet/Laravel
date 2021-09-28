@@ -31,3 +31,4 @@ Route::get('/all/categories',[CategoryController::class,'index'])->name('categor
 Route::post('/add/categories',[CategoryController::class,'AddCat'])->name('store.categories');
 Route::get('/category/edit/{id}',[CategoryController::class,'Edit']);
 Route::post('/category/update/{id}',[CategoryController::class,'Update']);
+Route::get('/softdelete/category/{id}',[CategoryController::class,'Trash']);

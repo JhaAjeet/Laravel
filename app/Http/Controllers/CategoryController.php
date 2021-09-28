@@ -18,6 +18,9 @@ class CategoryController extends Controller
 
         // if you want to fetch lattest product is first then use this lattest method
         $categories = Categories::latest()->paginate(5);
+        //delete trash
+
+        $trashCat = Categories::onlyTrashed()->latest()->paginate(3);
 
         //using query builder read data
         //$categories = DB::table('categories')->latest()->get();
@@ -31,7 +34,7 @@ class CategoryController extends Controller
         //         ->select('categories.*','users.name')
         //         ->latest()->paginate(5);
 
-        return view('Admin.Category', compact('categories'));
+        return view('Admin.Category', compact('categories','trashCat'));
     }
 
     public function AddCat(Request $request){
@@ -90,5 +93,10 @@ class CategoryController extends Controller
         DB::table('categories')->where('id',$id)->update($data);
 
          return redirect()->route('category')->with('sucess','categories Update  sucessfully');
+    }
+
+    public function Trash($id){
+        $delete = Categories::find($id)->delete();
+        return redirect()->back()->with('sucess','category softdelete sucessfully');
     }
 }
