@@ -72,15 +72,22 @@ class CategoryController extends Controller
 
     }
     public function Edit($id){
-        $categories = Categories::find($id);
+        // $categories = Categories::find($id);
+        $categories = DB::table('categories')->where('id',$id)->first();
         return view('Admin.Edit',compact('categories'));
     }
-    public function Update(Request $request ,$id){
-        $update = Categories::find($id)->update([
-            'categories_name' => $request->categories_name,
-            'user_id' => Auth::user()->id
 
-        ]);
+    public function Update(Request $request ,$id){
+        // $update = Categories::find($id)->update([
+        //     'categories_name' => $request->categories_name,
+        //     'user_id' => Auth::user()->id
+
+        // ]);
+
+        $data = array();
+        $data['categories_name'] = $request->categories_name;
+        $data['user_id'] = Auth::user()->id;
+        DB::table('categories')->where('id',$id)->update($data);
 
          return redirect()->route('category')->with('sucess','categories Update  sucessfully');
     }
