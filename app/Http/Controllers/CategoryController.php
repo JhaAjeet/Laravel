@@ -105,4 +105,10 @@ class CategoryController extends Controller
          return redirect()->route('category')->with('sucess','categories Restore  sucessfully');
 
     }
+
+    public function Delete($id){
+        $delete = Categories::onlyTrashed()->find($id)->forceDelete();
+
+        return redirect()->route('category')->with('sucess','categories Delete  sucessfully');
+    }
 }
