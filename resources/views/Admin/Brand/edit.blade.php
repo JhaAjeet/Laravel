@@ -16,6 +16,14 @@
             </div>
         </div> -->
 
+@if(session('sucess'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong>{{ session('sucess')}}</strong> 
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+
         <div class="container">
             <div class="row">
 
@@ -24,9 +32,11 @@
                     <div class="card">
                         <div class="cart-header">Brand Edit</div>
                         <div class="card-body">
-                        <form action="{{ url('brand/update/'.$brands->id) }}" method="POST">
+                        <form action="{{ url('brand/update/'.$brands->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-  <div class="mb-3">
+
+    <input type="hidden" name="old_image" value="{{ $brands->brand_image }}">
+    <div class="mb-3">
     
     <input type="text" class="form-control" name="brand_name" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $brands->brand_name }}">
     

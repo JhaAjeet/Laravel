@@ -51,7 +51,47 @@ public function Edit($id){
 }
 
 
-public function Update($id){
+public function Update(Request $request, $id){
+    $validated = $request->validate([
+            'brand_name' => 'required|min:4',
+           
+        ],
+        [
+            'brand_name.required' => 'Enter valid brand name',
+            'brand_image.min' => 'Brand longer then 4 cher',
+        
+        ]);
+    
+    $old_image = $request->old_image;
+
+    $image = $request->file('brand_image');
+
+    if ($image) {
+    $name_gen = hexdec(uniqid());
+    $img_ext = strtolower($image->getClientOriginalExtension());
+    $img_name = $name_gen.'.'.$img_ext;
+    $up_location = 'image/brand/';
+    $last_img = $up_location.$img_name;
+    $image->move($up_location,$img_name);
+
+    unlink($old_image);
+
+    Brand::find($id)->update([
+        'brand_name' => $request->brand_name,
+        'brand_image' => $last_img,
+        'created_at' => Carbon::now()
+    ]);
+
+    return redirect()->back()->with('sucess','brand image update sucessfully');
+    } else {
+        Brand::find($id)->update([
+        'brand_name' => $request->brand_name,
+        'created_at' => Carbon::now()
+    ]);
+
+    return redirect()->back()->with('sucess','brand image update sucessfully');
+    }
+
 
 }
 
