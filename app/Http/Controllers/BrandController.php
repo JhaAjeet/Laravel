@@ -43,4 +43,17 @@ class BrandController extends Controller
 
     return redirect()->back()->with('sucess','image inserted sucessfully');
 }
+
+
+public function Edit($id){
+ $brands = Brand::find($id);
+ return view('Admin.Brand.edit',compact('brands'));
+}
+
+
+public function Update($id){
+
+}
+
+
 }
