@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Multipic;
 use Illuminate\Support\Carbon;
 use Image;
 
@@ -115,6 +116,13 @@ public function Delete($id){
 
     return redirect()->back()->with('sucess','brand delete sucessfully');
 
+}
+
+// That is multi image all method
+
+public function Multipic(){
+    $images = Multipic::all();
+    return view('Admin.Multipic.index',compact('images'));
 }
 
 
