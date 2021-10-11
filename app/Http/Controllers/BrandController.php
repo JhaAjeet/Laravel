@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Multipic;
 use Illuminate\Support\Carbon;
 use Image;
+use Auth;
 
 
 class BrandController extends Controller
@@ -149,6 +150,11 @@ public function AddMulti(Request $request){
 
     return redirect()->back()->with('sucess','image inserted sucessfully');
 
+}
+
+public function Logout(){
+    Auth::logout();
+    return redirect()->route('login')->with('sucess','User Logout sucessfully');
 }
 
 
